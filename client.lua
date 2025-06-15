@@ -1,14 +1,19 @@
-local mostrarIDs = false
-local distanciaMaxima = 15.0
+-- CONFIGURATION
+local feedbackType = "notification" -- Options: "chat" or "notification"
+local distanciaMaxima = 15.0 -- Maximum distance to show IDs
 
+-- STATE
+local mostrarIDs = false
+
+-- Draw 3D text function
 function DrawText3D(x, y, z, text)
     local _, _x, _y = World3dToScreen2d(x, y, z)
     local px, py, pz = table.unpack(GetGameplayCamCoord())
     local dist = GetDistanceBetweenCoords(px, py, pz, x, y, z, 1)
-    local scale = (1/dist)*2
-    if scale > 0.7 then scale = 0.7 end -- Limite máximo para não ficar exagerado
+    local scale = (1 / dist) * 2
+    if scale > 0.7 then scale = 0.7 end
     if _x and _y then
-        SetTextScale(1.0*scale, 1.0*scale) -- Aumentado de 0.35 para 0.55
+        SetTextScale(1.0 * scale, 1.0 * scale)
         SetTextFont(4)
         SetTextProportional(1)
         SetTextColour(255, 255, 255, 215)
@@ -19,6 +24,25 @@ function DrawText3D(x, y, z, text)
     end
 end
 
+-- Show notification using ox_lib
+function ShowNotification(msg)
+    lib.notify({
+        title = 'ID',
+        description = msg,
+        type = 'inform'
+    })
+end
+
+-- Show message in chat
+function ShowChatMessage(msg, color)
+    TriggerEvent("chat:addMessage", {
+        color = color or {0, 255, 0},
+        multiline = true,
+        args = {"[ID]", msg}
+    })
+end
+
+-- Main thread to draw IDs
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
@@ -29,9 +53,8 @@ Citizen.CreateThread(function()
                 local myCoords = GetEntityCoords(PlayerPedId())
                 local dist = #(myCoords - coords)
                 if dist < distanciaMaxima then
-                    -- Ajusta a altura do texto para o próprio jogador
                     local zOffset = (id == PlayerId()) and 1.5 or 1.0
-                    DrawText3D(coords.x, coords.y, coords.z + zOffset, "ID: "..GetPlayerServerId(id))
+                    DrawText3D(coords.x, coords.y, coords.z + zOffset, "ID: " .. GetPlayerServerId(id))
                 end
             end
         else
@@ -40,9 +63,20 @@ Citizen.CreateThread(function()
     end
 end)
 
+-- Command to toggle ID display
 RegisterCommand("mostrarid", function()
     mostrarIDs = not mostrarIDs
-    TriggerEvent("chat:addMessage", {
-        args = { mostrarIDs and "^2[ID]" or "^1[ID]", mostrarIDs and "IDs ativados." or "IDs desativados." }
-    })
+    if feedbackType == "notification" then
+        if mostrarIDs then
+            ShowNotification("IDs ativados.")
+        else
+            ShowNotification("IDs desativados.")
+        end
+    else
+        if mostrarIDs then
+            ShowChatMessage("IDs ativados.", {0, 255, 0})
+        else
+            ShowChatMessage("IDs desativados.", {255, 0, 0})
+        end
+    end
 end)
