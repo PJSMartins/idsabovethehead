@@ -1,8 +1,10 @@
 [PT]
 
-Script standalone para FiveM que exibe o ID do jogador acima da cabeça de todos os jogadores próximos, incluindo o próprio, ativado/desativado por comando no chat. 
+Script standalone para FiveM que exibe o ID do servidor acima da cabeça de todos os jogadores próximos, incluindo o seu, ativado/desativado pelo comando /mostrarid no chat.
 
-Não requer ESX, QBCore ou qualquer outro framework — basta instalar, configurar e usar.
+Você pode escolher se o aviso aparece como mensagem no chat ou como notificação moderna (usando ox_lib).
+
+Não requer framework—basta instalar, configurar e usar.
 
 Funcionalidades:
 
@@ -16,13 +18,21 @@ Texto 3D ampliado e personalizável
 
 Código limpo, leve e fácil de adaptar
 
-Ideal para servidores roleplay ou freeroam que desejam uma solução simples e eficiente para identificação visual de jogadores.
+Aviso como mensagem de chat ou notificação do ox_lib
+
+Dependências:
+
+ox_lib (para notificações)
+
+Lua 5.4 (definido com lua54 'yes' no fxmanifest.lua)
 
 [EN]
 
-Standalone FiveM script that displays each player’s server ID above their head—including your own—when toggled via a chat command. 
+Standalone FiveM script that displays each player’s server ID above their head—including your own—when toggled via the /mostrarid chat command. 
 
-No dependencies on ESX, QBCore, or any other framework; just install, configure, and use.
+You can choose to show feedback as a chat message or a modern notification (using ox_lib).
+
+No framework required—just install, configure, and use.
 
 Features:
 
@@ -36,13 +46,21 @@ Enlarged, customizable 3D text
 
 Clean, lightweight, and easy-to-adapt code
 
-Perfect for roleplay or freeroam servers seeking a simple and efficient player identification solution.
+Feedback as chat message or ox_lib notification
+
+Dependencies:
+
+ox_lib (for notifications)
+
+Lua 5.4 (set with lua54 'yes' in fxmanifest.lua)
 
 [ES]
 
-Script standalone para FiveM que muestra el ID del servidor de cada jugador sobre su cabeza, incluido el tuyo, activado/desactivado mediante un comando en el chat. 
+Script standalone para FiveM que muestra el ID del servidor de cada jugador sobre su cabeza, incluido el tuyo, activado/desactivado mediante el comando /mostrarid en el chat. 
 
-No requiere ESX, QBCore ni ningún otro framework: solo instala, configura y úsalo.
+Puedes elegir si el aviso aparece como mensaje en el chat o como notificación moderna (usando ox_lib).
+
+No requiere ningún framework: solo instala, configura y úsalo.
 
 Características:
 
@@ -56,4 +74,10 @@ Texto 3D ampliado y personalizable
 
 Código limpio, ligero y fácil de adaptar
 
-Ideal para servidores de roleplay o freeroam que buscan una solución simple y eficiente para la identificación visual de jugadores.
+Aviso como mensaje de chat o notificación de ox_lib
+
+Dependencias:
+
+ox_lib (para notificaciones)
+
+Lua 5.4 (configurado con lua54 'yes' en fxmanifest.lua)
